@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Calorie Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css"> </head>
+<body onload="initializeApp()"> <div id="app-container">
+
+        <nav id="main-nav">
+            <h1>Tracker</h1>
+            <ul>
+                <li><a href="#" onclick="showPage('dashboard')">Dashboard</a></li>
+                <li><a href="#" onclick="showPage('logging')">Log Meals</a></li>
+                <li><a href="#" onclick="showPage('settings')">Settings</a></li>
+            </ul>
+        </nav>
+
+        <main id="content-area">
+
+            <div id="page-dashboard" class="page active">
+                <h2>Dashboard</h2>
+                <div class="card-grid">
+                    <div class="stat-card">
+                        <h3>Today</h3>
+                        <p class="big-number" id="daily-consumed-stat">0</p>
+                        <p class="sub-text">kcal consumed</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>Target</h3>
+                        <p class="big-number" id="target-stat">2000</p>
+                        <p class="sub-text">kcal / day</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>BMI</h3>
+                        <p class="big-number" id="bmi-stat">--.-</p>
+                        <p class="sub-text" id="bmi-category">Enter Settings</p>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Last Week: Consumed vs Target</h3>
+                    <canvas id="calorieChart"></canvas> </div>
+                <div class="chart-container">
+                    <h3>Weight Trend</h3>
+                    <canvas id="weightChart"></canvas> </div>
+            </div>
+
+            <div id="page-logging" class="page">
+                <div class="header-action">
+                    <h2>Log Daily Intake</h2>
+                    <button class="btn-accent" onclick="startNewDay()">Start New Day</button>
+                </div>
+                
+                <form id="log-entry-form" class="entry-form">
+                    <input type="text" id="meal-name" placeholder="Item/Meal Name (e.g., Apple)" required>
+                    <input type="number" id="meal-calories" placeholder="Est. Calories" required>
+                    <button type="submit" class="btn-submit">Add</button>
+                </form>
+
+                <div id="daily-log-display">
+                    <h3>Today's Meals:</h3>
+                    <ul id="meal-list">
+                        </ul>
+                    <div class="total-bar">
+                        Today's Total: <span id="log-total-consumed">0</span> kcal
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-settings" class="page">
+                <h2>Settings & Targets</h2>
+                <form id="settings-form" class="settings-grid">
+                    <div class="form-group">
+                        <label>Age:</label>
+                        <input type="number" id="set-age" placeholder="25">
+                    </div>
+                    <div class="form-group">
+                        <label>Height (cm):</label>
+                        <input type="number" id="set-height" placeholder="175">
+                    </div>
+                    <div class="form-group">
+                        <label>Daily Calorie Target:</label>
+                        <input type="number" id="set-calorie-target" placeholder="2000">
+                    </div>
+                    <div class="form-group">
+                        <label>Current Weight (kg):</label>
+                        <input type="number" id="set-current-weight" placeholder="75">
+                    </div>
+                    <button type="submit" class="btn-save">Save Settings & Calculate BMI</button>
+                </form>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script> </body>
+</html>
